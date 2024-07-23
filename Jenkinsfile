@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ["${env.SSH_CREDENTIALS_ID}"]) {
-                        sh "ssh ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker stop ${env.DOCKER_IMAGE} || true && docker rm ${env.DOCKER_IMAGE} || true'"
+                        sh "ssh -o StrictHostKeyChecking=no ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker stop ${env.DOCKER_IMAGE} || true && docker rm ${env.DOCKER_IMAGE} || true'"
                     }
                 }
             }
@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ["${env.SSH_CREDENTIALS_ID}"]) {
-                        sh "ssh ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker run --name ${env.DOCKER_IMAGE} -d -p ${env.PORT} ${env.DOCKER_IMAGE_TAG}'"
+                        sh "ssh -o StrictHostKeyChecking=no ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker run --name ${env.DOCKER_IMAGE} -d -p ${env.PORT} ${env.DOCKER_IMAGE_TAG}'"
                     }
                 }
             }
