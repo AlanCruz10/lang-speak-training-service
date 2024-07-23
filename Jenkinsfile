@@ -8,7 +8,7 @@ pipeline {
         REMOTE_USER = "ubuntu"
         REMOTE_HOST = "184.73.214.98"
         EMAIL_ADDRESS = "213376@ids.upchiapas.edu.mx"
-        SSH_CREDENTIALS_ID = "jenkins-ssh"
+        SSH_CREDENTIALS_ID = "ssh-credentials-lang-speak-training-prod-ec2"
     }
 
     stages {
