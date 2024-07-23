@@ -1,6 +1,13 @@
-def print_hi(name):
-    print(f'Hi, {name}')
+import fastapi
+import uvicorn
+
+app = fastapi.FastAPI()
 
 
-if __name__ == '__main__':
-    print_hi('PyCharm')
+@app.get("/")
+def read_root():
+    return fastapi.responses.JSONResponse(content={"message": "Hello, world!"})
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="localhost", port=8082)
