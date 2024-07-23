@@ -27,7 +27,9 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.build("${env.DOCKER_IMAGE_TAG}")
+                    sshagent(credentials: ["${env.SSH_CREDENTIALS_ID}"]) {
+                        sh "ssh -o StrictHostKeyChecking=no ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker build -f Dockerfile -t ${env.DOCKER_IMAGE_TAG} .'"
+                    }
                 }
             }
         }
