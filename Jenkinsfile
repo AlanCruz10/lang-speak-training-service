@@ -35,11 +35,11 @@ pipeline {
                             def containerRunning = sh(script: "ssh -o StrictHostKeyChecking=no ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker ps -q -f name=${env.DOCKER_IMAGE}'", returnStatus: true) == 0
                             def containerExists = sh(script: "ssh -o StrictHostKeyChecking=no ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker ps -a -q -f name=${env.DOCKER_IMAGE}'", returnStatus: true) == 0
                             if (containerRunning) {
-                                sh "ssh -o StrictHostKeyChecking=no ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker stop ${env.DOCKER_IMAGE} && docker rm ${env.DOCKER_IMAGE} && docker rmi ${env.DOCKER_IMAGE_TAG}'"
+                                sh "ssh -o StrictHostKeyChecking=no ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker stop ${env.DOCKER_IMAGE} || true && docker rm ${env.DOCKER_IMAGE} || true && docker rmi ${env.DOCKER_IMAGE_TAG} || true'"
                             } else if (containerExists) {
-                                sh "ssh -o StrictHostKeyChecking=no ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker rm ${env.DOCKER_IMAGE} && docker rmi ${env.DOCKER_IMAGE_TAG}'"
+                                sh "ssh -o StrictHostKeyChecking=no ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker rm ${env.DOCKER_IMAGE} || true && docker rmi ${env.DOCKER_IMAGE_TAG} || true'"
                             } else {
-                                sh "ssh -o StrictHostKeyChecking=no ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker rmi ${env.DOCKER_IMAGE_TAG}'"
+                                sh "ssh -o StrictHostKeyChecking=no ${env.REMOTE_USER}@${env.REMOTE_HOST} 'docker rmi ${env.DOCKER_IMAGE_TAG} || true'"
                             }
                         }
                     }
