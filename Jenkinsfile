@@ -7,7 +7,7 @@ pipeline {
         DOCKER_IMAGE_TAG = "${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
         REMOTE_USER = "ubuntu"
         REMOTE_HOST = "184.73.214.98"
-        EMAIL_ADDRESS = "213376@ids.upchiapas.edu.mx"
+//         EMAIL_ADDRESS = "213376@ids.upchiapas.edu.mx"
         SSH_CREDENTIALS_ID = "ssh-credentials-lang-speak-training-prod-ec2"
     }
 
@@ -57,16 +57,16 @@ pipeline {
             }
         }
     }
-    post {
-        success {
-            mail to: "${env.EMAIL_ADDRESS}",
-                 subject: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Good news! The build ${env.BUILD_NUMBER} was successful."
-        }
-        failure {
-            mail to: "${env.EMAIL_ADDRESS}",
-                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "The build ${env.BUILD_NUMBER} failed. Please check the logs for details."
-        }
-    }
+//     post {
+//         success {
+//             mail to: "${env.EMAIL_ADDRESS}",
+//                  subject: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+//                  body: "Good news! The build ${env.BUILD_NUMBER} was successful."
+//         }
+//         failure {
+//             mail to: "${env.EMAIL_ADDRESS}",
+//                  subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+//                  body: "The build ${env.BUILD_NUMBER} failed. Please check the logs for details."
+//         }
+//     }
 }
